@@ -1,9 +1,6 @@
 package homework1.tests;
 
-import homework1.pages.AccountPage;
-import homework1.pages.AddAccountPage;
-import homework1.pages.LoginPage;
-import homework1.pages.MainPage;
+import homework1.pages.*;
 import homework1.utils.TestListener;
 import io.qameta.allure.Description;
 import org.openqa.selenium.WebDriver;
@@ -21,12 +18,14 @@ import java.util.HashMap;
 @Listeners(TestListener.class)
 public class BaseTest {
 
+    protected AccountPage accountPage;
+    protected AddAccountPage addAccountPage;
+    protected LoginPage loginPage;
+    protected MainPage mainPage;
+    protected AddOpportunityPage addOpportunityPage;
+    protected OpportunityPage opportunityPage;
     WebDriver driver;
     WebDriverWait wait;
-    AccountPage accountPage;
-    AddAccountPage addAccountPage;
-    LoginPage loginPage;
-    MainPage mainPage;
 
     @BeforeMethod(alwaysRun = true)
     @Description("Настройка браузера")
@@ -53,6 +52,8 @@ public class BaseTest {
         addAccountPage = new AddAccountPage(driver, wait);
         loginPage = new LoginPage(driver, wait);
         mainPage = new MainPage(driver, wait);
+        addOpportunityPage = new AddOpportunityPage(driver, wait);
+        opportunityPage = new OpportunityPage(driver, wait);
     }
 
     @AfterMethod(alwaysRun = true)
