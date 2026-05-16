@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AddAccountPageTest extends BaseTest {
+
     @Test(description = "Создание нового аккаунта на AddAccountPage",
             testName = "Успешное создание аккаунта",
             priority = 1)

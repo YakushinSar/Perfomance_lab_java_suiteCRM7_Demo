@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
+
     private final By USERNAME_FIELD = By.xpath("//input[@id='user_name']");
     private final By PASSWORD_FIELD = By.xpath("//input[@id='username_password']");
     private final By LOGIN_BUTTON = By.xpath("//input[@id='bigbutton']");

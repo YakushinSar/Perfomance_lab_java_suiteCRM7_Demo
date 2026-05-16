@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class Select {
+
     private final String SELECT_PATTERN = "//*[contains(text(), '%s')]/following-sibling::div//";
     WebDriver driver;
     String label;
