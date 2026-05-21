@@ -1,6 +1,7 @@
 package homework3.tests;
 
 import homework3.dto.OpportunityDTO;
+import homework3.factory.OpportunityFactory;
 import homework3.pages.LoginPage;
 import homework3.utils.Retry;
 import org.testng.Assert;
@@ -13,13 +14,32 @@ public class AddOpportunityPageTest extends BaseTest {
             testName = "Успешное создание возможности (Opportunity)",
             priority = 1)
     public void checkAddNewOpportunity() {
-        String uniqueName = "Test Opp " + System.currentTimeMillis();
+        // Используем Factory для генерации данных
+        OpportunityDTO opportunity = OpportunityFactory.getRandomOpportunity();
+        String uniqueName = opportunity.getName();
 
-        OpportunityDTO opportunity = new OpportunityDTO(
-                uniqueName, "Test", "12/31/2025", "10000",
-                "Prospecting", "New Business", "Cold Call",
-                "Call client", "Summer Campaign", "Test description"
-        );
+        boolean isCreated = new LoginPage(driver, wait)
+                .openLoginPage()
+                .isPageOpened()
+                .loginInLoginPage("will", "will")
+                .isPageOpened()
+                .goToAddOpportunityPage()
+                .isPageOpened()
+                .createOpportunity(opportunity)
+                .clickSave()
+                .isPageOpened()
+                .isOpportunityCreated(uniqueName);
+
+        Assert.assertTrue(isCreated, "Opportunity '" + uniqueName + "' не была создана");
+    }
+
+    @Test(description = "Создание возможности с конкретным Sales Stage",
+            testName = "Создание возможности с заданным этапом",
+            priority = 2)
+    public void checkAddNewOpportunityWithSpecificStage() {
+        // Используем Factory с конкретной стадией
+        OpportunityDTO opportunity = OpportunityFactory.getOpportunityWithSalesStage("Closing");
+        String uniqueName = opportunity.getName();
 
         boolean isCreated = new LoginPage(driver, wait)
                 .openLoginPage()
